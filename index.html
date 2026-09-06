@@ -26,7 +26,8 @@ body{
   background:#3a2f22;
   color:var(--ink);
   font-family:'EB Garamond',Georgia,'Times New Roman',serif;
-  font-size:17px;
+  font-size:calc(17px * var(--user-font-scale, 1));
+  line-height:1.55;
 }
 h1,h2,h3,h4,.display{font-family:'Playfair Display',Georgia,serif;}
 
@@ -41,6 +42,21 @@ nav.toc{
 }
 nav.toc a{color:#d9c48f;text-decoration:none;letter-spacing:.4px;text-transform:uppercase;font-size:.88em;}
 nav.toc a:hover{color:#fff;}
+
+/* Пользовательский размер текста */
+.text-zoom{
+  position:fixed;right:18px;bottom:18px;z-index:150;
+  display:flex;align-items:center;gap:4px;padding:6px;
+  background:#241b12;border:2px solid var(--gold);border-radius:24px;
+  box-shadow:0 4px 18px rgba(0,0,0,.35);
+}
+.text-zoom button{
+  min-width:34px;min-height:34px;border:0;border-radius:18px;cursor:pointer;
+  background:#f3e7c9;color:var(--ink);font-family:'Playfair Display',Georgia,serif;
+  font-weight:700;font-size:16px;line-height:1;
+}
+.text-zoom button:hover,.text-zoom button:focus-visible{background:var(--gold);color:#fff;outline:2px solid #fff;outline-offset:1px;}
+.text-zoom .zoom-label{color:#fff8e6;font-size:12px;padding:0 4px;white-space:nowrap;}
 
 .page{
   max-width:1300px;margin:26px auto;
@@ -229,37 +245,37 @@ footer.pfoot{text-align:center;font-size:.78em;color:var(--muted);margin-top:26p
 /* ===== адаптив под телефоны ===== */
 @media (max-width:760px){
   html{-webkit-text-size-adjust:100%;}
-  body{font-size:15px;}
+  body{font-size:calc(18px * var(--user-font-scale, 1));line-height:1.6;}
 
   /* nav becomes a horizontally-scrollable pill bar instead of wrapping */
   nav.toc{
     flex-wrap:nowrap;justify-content:flex-start;gap:6px;
-    padding:9px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    padding:10px 12px;overflow-x:auto;-webkit-overflow-scrolling:touch;
     scrollbar-width:none;
   }
   nav.toc::-webkit-scrollbar{display:none;}
   nav.toc a{
-    flex:0 0 auto;font-size:.78em;padding:5px 11px;
+    flex:0 0 auto;font-size:.86em;padding:7px 12px;
     background:rgba(255,255,255,.06);border-radius:14px;white-space:nowrap;
   }
 
-  .page{padding:16px 10px;margin:12px auto;border-radius:0;}
+  .page{padding:20px 12px;margin:12px auto;border-radius:0;}
   .page::before{inset:8px;}
   .corner{width:22px;height:22px;top:10px !important;left:10px !important;right:10px !important;bottom:10px !important;}
-  .page-title{font-size:1.4em;}
-  h1.page-title{font-size:1.55em !important;}
-  .page-sub{font-size:.85em;padding:0 6px;}
+  .page-title{font-size:1.55em;line-height:1.2;}
+  h1.page-title{font-size:1.75em !important;}
+  .page-sub{font-size:.98em;padding:0 8px;line-height:1.4;}
   .rule{width:150px;margin:8px auto 18px;}
   .rule::before,.rule::after{display:none;}
 
   /* cover banners: stack cleanly, keep surname ribbons paired */
   .banners{flex-direction:column;align-items:center;gap:8px;margin-bottom:2px;}
   .banners .side{flex-direction:row;gap:8px;justify-content:center;flex-wrap:wrap;}
-  .ribbon{font-size:.74em;padding:6px 12px;min-width:auto;}
+  .ribbon{font-size:.84em;padding:7px 14px;min-width:auto;}
 
   .legend{
     display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;
-    font-size:.7em;justify-items:start;margin:4px 0 14px;
+    font-size:.82em;justify-items:start;margin:8px 0 16px;
   }
   .legend .item{gap:5px;}
 
@@ -271,53 +287,56 @@ footer.pfoot{text-align:center;font-size:.78em;color:var(--muted);margin-top:26p
     background-repeat:no-repeat;background-attachment:local, local;background-size:18px 100%,18px 100%;
   }
   .root-row{flex-wrap:nowrap;gap:8px;justify-content:flex-start;padding:0 4px 4px;width:max-content;margin:0 auto;}
-  .root-row .pcard{font-size:.72em;min-width:112px;max-width:138px;flex:0 0 auto;}
+  .root-row .pcard{font-size:.82em;min-width:132px;max-width:158px;flex:0 0 auto;}
   .spouse-connector{width:22px;font-size:1.2em;}
   .spouse-connector::before,.spouse-connector::after{width:8px;}
   .spouse-connector::before{left:-9px;} .spouse-connector::after{right:-9px;}
 
-  .pcard{font-size:.66em;min-width:100px;max-width:130px;padding:7px 9px;}
-  .cellgroup{max-width:220px;gap:5px;}
+  .pcard{font-size:.76em;min-width:118px;max-width:150px;padding:9px 10px;}
+  .cellgroup{max-width:250px;gap:7px;}
   ul.tree li{padding:18px 6px 0 6px;}
   .legend-note{font-size:.78em;padding:0 8px;}
 
   .fam-hero{flex-direction:column;gap:14px;}
   .fam-card{padding:13px 15px;min-width:0;}
-  .context-box{padding:11px 14px;font-size:.88em;margin:14px 0;}
-  .doc-quote{font-size:.84em;padding:9px 12px;}
+  .context-box{padding:13px 16px;font-size:.98em;margin:16px 0;}
+  .doc-quote{font-size:.94em;padding:11px 14px;}
 
   .geo-wrap{flex-direction:column;gap:16px;}
   #leafletMap{height:320px !important;border-width:4px;}
-  .geo-legend{font-size:.8em;}
+  .geo-legend{font-size:.92em;}
   .geo-legend td.num{width:20px;height:20px;font-size:.75em;}
 
-  table.doc{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--gold-light);font-size:.78em;white-space:nowrap;}
+  table.doc{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--gold-light);font-size:.92em;white-space:nowrap;}
   table.doc thead,table.doc tbody,table.doc tr{display:table;width:100%;table-layout:fixed;}
-  table.doc th,table.doc td{padding:6px 7px;white-space:normal;}
-  h3.sub{margin-top:22px;font-size:1.05em;}
-  ul.bullets{font-size:.86em;}
+  table.doc th,table.doc td{padding:9px 10px;white-space:normal;}
+  h3.sub{margin-top:24px;font-size:1.18em;}
+  ul.bullets{font-size:.98em;}
 
-  .found-box,.notfound-box,.confirmneed{padding:11px 14px;font-size:.86em;}
+  .found-box,.notfound-box,.confirmneed{padding:13px 16px;font-size:.98em;}
 
   #overlay{padding:0;align-items:flex-end;}
   #modal{
-    padding:20px 16px 26px;max-height:88vh;width:100%;
+    padding:24px 18px 32px;max-height:90vh;width:100%;
     border-radius:14px 14px 0 0;border-width:2px;
   }
-  #modal h2{font-size:1.15em;}
+  #modal h2{font-size:1.35em;line-height:1.2;}
   #modal .close-btn{top:8px;right:10px;font-size:1.9em;padding:4px 8px;}
-  #modal .m-section{font-size:.9em;}
+  #modal .m-section{font-size:1em;}
 
-  footer.pfoot{font-size:.72em;padding:0 8px;margin-top:18px;}
+  footer.pfoot{font-size:.84em;padding:0 8px;margin-top:20px;}
+  .text-zoom{right:12px;bottom:12px;padding:7px;}
+  .text-zoom button{min-width:40px;min-height:40px;font-size:18px;}
+  .text-zoom .zoom-label{font-size:13px;}
 }
 
 @media (max-width:420px){
-  .page{padding:13px 8px;}
-  .root-row .pcard{min-width:100px;max-width:122px;font-size:.68em;}
-  .pcard{min-width:92px;max-width:118px;font-size:.62em;}
+  .page{padding:16px 10px;}
+  .root-row .pcard{min-width:118px;max-width:144px;font-size:.75em;}
+  .pcard{min-width:108px;max-width:136px;font-size:.7em;}
   .legend{grid-template-columns:1fr;}
-  h1.page-title{font-size:1.35em !important;}
-  .ribbon{font-size:.68em;padding:5px 10px;}
+  h1.page-title{font-size:1.55em !important;}
+  .ribbon{font-size:.78em;padding:6px 12px;}
 }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css">
@@ -336,6 +355,12 @@ footer.pfoot{text-align:center;font-size:.78em;color:var(--muted);margin-top:26p
   <a href="#search">Поиск в источниках</a>
   <a href="#sources">Источники</a>
 </nav>
+
+<div class="text-zoom" aria-label="Размер текста">
+  <span class="zoom-label" id="textSizeLabel" aria-live="polite">Текст 100%</span>
+  <button type="button" onclick="changeTextSize(-0.1)" aria-label="Уменьшить текст">A−</button>
+  <button type="button" onclick="changeTextSize(0.1)" aria-label="Увеличить текст">A+</button>
+</div>
 
 <!-- ============ PAGE 1: INTERACTIVE TREE ============ -->
 <section class="page" id="cover">
@@ -462,6 +487,10 @@ footer.pfoot{text-align:center;font-size:.78em;color:var(--muted);margin-top:26p
       <h4>О фамилии Гоголь</h4>
       <p>Фамилия Гоголь — древнеславянская, происходит от названия птицы-нырка (гоголь, утка из семейства утиных). Слово встречается в украинском, польском и чешском языках, что говорит о его давности. Есть и переносное значение — «ходить гоголем» означало держаться важно, щеголевато. Фамилия распространена как в русском, так и в украинском ареалах, в том числе на Подолии.</p>
     </div>
+    <div class="context-box">
+      <h4>Семейный документ</h4>
+      <p>Паспортная книжка № 21002 Степана Андреевича Гоголя подтверждает: он родился 11 июня 1846 года и был записан «из крестьян». По семейному свидетельству, Степан Андреевич — отец Александра Степановича Гоголя (1903 г.р.), дед Марии Александровны Гоголь и пра-прадедушка Анастасии. Скан документа на сайте не публикуется.</p>
+    </div>
     <p style="text-align:center;color:var(--muted);font-style:italic;">Полная информация по каждому члену этой ветви — на интерактивном древе (кликните на имя).</p>
     <footer class="pfoot">Источники — см. страницу «Источники»</footer>
   </div>
@@ -496,7 +525,6 @@ footer.pfoot{text-align:center;font-size:.78em;color:var(--muted);margin-top:26p
     <h3 class="sub">Архивные документы о репрессиях</h3>
     <table class="doc">
       <tr><th>Документ</th><th>Год</th><th>Содержание</th></tr>
-      <tr><td>Паспортная книжка № 21002 Анны Ивановны Бобровой</td><td>семейный архив</td><td>Лист владельца подтверждает полное имя «Боброва Анна Ивановна», сословие «из крестьян» и точную дату рождения: 11 июня 1884 года. Сам документ хранится в семейном архиве и не публикуется.</td></tr>
       <tr><td>Справка о реабилитации</td><td>1997</td><td>Боброва (Иванова) Валентина Филимоновна (1940 г.р.) проживала на спецпоселении вместе с отцом, Бобровым Филимоном Ивановичем, высланным в 1931 г. из Башкирской АССР — на основании закона РФ «О реабилитации жертв политических репрессий».</td></tr>
       <tr><td>Справка о снятии со спецучёта</td><td>—</td><td>Бобров Филимон Иванович (1915, д. Кувыково Кушнаренковского р-на Башкирской АССР) вместе с семьёй — отцом Иваном Васильевичем (1884) и матерью Анной Ивановной (1884) — освобождён от спецпоселения по постановлению УМГБ Кемеровской области 14 мая 1951 года.</td></tr>
       <tr><td>Архивная справка МВД</td><td>1997</td><td>Бобров Иван Васильевич (1885 г.р.) с семьёй — отец Василий (86 лет), мать Ольга (86 лет), жена Анна Ивановна (45 лет), дети Филимон (15), Егор (6), Григорий (5), Фёдор (2), Клавдия (13) — в 1931 году выселены из Кушнаренковского района Башкирской АССР на основании постановления ЦИК и СНК СССР от 01.02.1930, направлены в спецпоселение в Кемеровскую область.</td></tr>
@@ -604,7 +632,7 @@ footer.pfoot{text-align:center;font-size:.78em;color:var(--muted);margin-top:26p
       <li><a href="https://ru.wikisource.org/wiki/%D0%A3%D0%BA%D0%B0%D0%B7_%D0%9F%D1%80%D0%B5%D0%B7%D0%B8%D0%B4%D0%B8%D1%83%D0%BC%D0%B0_%D0%92%D0%A1_%D0%A1%D0%A1%D0%A1%D0%A0_%D0%BE%D1%82_04.06.1947_%D0%BE%D0%B1_%D1%83%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%BE%D0%B9_%D0%BE%D1%82%D0%B2%D0%B5%D1%82%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D0%B7%D0%B0_%D1%85%D0%B8%D1%89%D0%B5%D0%BD%D0%B8%D0%B5_%D0%B3%D0%BE%D1%81%D1%83%D0%B4%D0%B0%D1%80%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B8_%D0%BE%D0%B1%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B5%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE_%D0%B8%D0%BC%D1%83%D1%89%D0%B5%D1%81%D1%82%D0%B2%D0%B0">Указ Президиума ВС СССР от 04.06.1947 (Викитека)</a></li>
       <li>Архивные справки семьи: справка о реабилитации (1997), справка о снятии со спецучёта, архивная справка МВД (1997) — предоставлены Анастасией</li>
       <li>Свидетельства о рождении и о браке всех бабушек и дедушек, включая свидетельство о рождении и свидетельство о браке Филимона Ивановича Боброва — из семейного архива, предоставлены Анастасией</li>
-      <li>Паспортная книжка № 21002 Бобровой Анны Ивановны — семейный архив: подтверждает дату рождения 11.06.1884 и сословие «из крестьян»; скан не публикуется</li>
+      <li>Паспортная книжка № 21002 Гоголя Степана Андреевича — семейный архив: подтверждает полное имя, сословие «из крестьян» и дату рождения 11.06.1846; скан не публикуется</li>
       <li>Устные семейные сведения (в т.ч. со слов бабушки Анастасии, Валентины Филимоновны)</li>
     </ul>
     <footer class="pfoot">Родословное древо составлено на основе сведений Анастасии Александровны Брейтерман, семейных архивных справок и открытого веб-поиска · июль 2026</footer>
@@ -706,10 +734,14 @@ ggm_malka_mintelman:{name:"Минтельман Малка Боруховна",y
  confirmneed:[`Метрические книги Каменецкого раввината (Госархив Хмельницкой области, фонд 277) частично сохранились для периода начала XX века — теоретически запись о её рождении в 1909 году может там находиться. Поиск не проводился, это направление для дальнейшей архивной работы.`],
  related:[{id:"ggf_aron_srulevich",label:"муж Арон Срулевич"},{id:"gf_semyon_aronovich",label:"сын Семён Аронович"}]},
 
-ggf_alexander_gogol:{name:"Гоголь Александр Степанович",years:"даты неизвестны",place:"вероятно Каменец-Подольский",role:"прадед по отцу",branch:"blue",main:true,
- bio:`<p>Отец Марии Александровны Гоголь. Украинец по происхождению.</p>`,
+ggf_alexander_gogol:{name:"Гоголь Александр Степанович",years:"1903 – ?",place:"вероятно Каменец-Подольский",role:"прадед по отцу",branch:"blue",main:true,
+ bio:`<p>Родился в 1903 году. Сын Степана Андреевича Гоголя, муж Анны Иосифовны Гоголь и отец Марии Александровны Гоголь. Украинец по происхождению.</p>`,
  assumptions:[`Место рождения указано как «вероятно Каменец-Подольский» — это предположение по месту рождения дочери, документально не подтверждено.`],
- related:[{id:"ggm_anna_gogol",label:"жена Анна Иосифовна"},{id:"gm_maria_gogol",label:"дочь Мария"}]},
+ related:[{id:"ggggf_stepan_gogol",label:"отец Степан Андреевич"},{id:"ggm_anna_gogol",label:"жена Анна Иосифовна"},{id:"gm_maria_gogol",label:"дочь Мария"}]},
+
+ggggf_stepan_gogol:{name:"Гоголь Степан Андреевич",years:"11.06.1846 – ?",place:"место рождения не указано в документе",role:"пра-прадедушка по отцу",branch:"blue",main:true,
+ bio:`<p>Отец Александра Степановича Гоголя и дед Марии Александровны Гоголь. В паспортной книжке № 21002 из семейного архива записаны его полное имя, сословие «из крестьян» и дата рождения: 11.06.1846.</p>`,
+ related:[{id:"ggf_alexander_gogol",label:"сын Александр Степанович"},{id:"gm_maria_gogol",label:"внучка Мария Александровна"}]},
 
 ggm_anna_gogol:{name:"Гоголь Анна Иосифовна",years:"даты неизвестны",place:"вероятно Каменец-Подольский",role:"прабабушка по отцу",branch:"blue",main:true,
  bio:`<p>Мать Марии Александровны Гоголь. Украинка по происхождению. Девичья фамилия неизвестна.</p>`,
@@ -754,8 +786,8 @@ ggf_ivan_vasilievich_bobrov:{name:"Бобров Иван Васильевич",y
  confirmneed:[`Национальный архив Республики Башкортостан ведёт проект «Башархив», где публикуются метрические и другие генеалогические материалы. Для православного населения региона сохранились метрические книги начиная с XIX века, а ревизские сказки — за 1795–1858 годы. Это делает реалистичным продолжение линии Бобровых за пределы 1845 года (когда родились Василий и Ольга) — но поиск по этим материалам ещё предстоит провести.`],
  related:[{id:"ggggf_vasily_bobrov",label:"отец Василий"},{id:"ggggm_olga",label:"мать Ольга"},{id:"ggm_anna_ivanovna_bobrova",label:"жена Анна Ивановна"},{id:"ggf_filimon_bobrov",label:"сын Филимон"}]},
 
-ggm_anna_ivanovna_bobrova:{name:"Боброва Анна Ивановна",years:"11.06.1884 – 14.05.1951",place:"д. Кувыково → Кемеровская обл.",role:"прапрабабушка",branch:"amber",main:true,
- bio:`<p>Родилась 11.06.1884 — точная дата подтверждена паспортной книжкой № 21002 из семейного архива. В документе записано: «Боброва Анна Ивановна»; сословие — «из крестьян».</p><p>Жена Ивана Васильевича Боброва. Была на спецпоселении вместе с семьёй после высылки 1931 года. Умерла 14.05.1951, ещё находясь на спецпоселении в Кемеровской области — по документам была официально снята с учёта в связи со смертью.</p>`,
+ggm_anna_ivanovna_bobrova:{name:"Боброва Анна Ивановна",years:"1884 – 14.05.1951",place:"д. Кувыково → Кемеровская обл.",role:"прапрабабушка",branch:"amber",main:true,
+ bio:`<p>Родилась в 1884 году. Жена Ивана Васильевича Боброва. Была на спецпоселении вместе с семьёй после высылки 1931 года. Умерла 14.05.1951, ещё находясь на спецпоселении в Кемеровской области — по документам была официально снята с учёта в связи со смертью.</p>`,
  related:[{id:"ggf_ivan_vasilievich_bobrov",label:"муж Иван Васильевич"},{id:"ggf_filimon_bobrov",label:"сын Филимон"}]},
 
 ggggf_vasily_bobrov:{name:"Бобров Василий",years:"около 1845",place:"неизвестно",role:"предок 6-го поколения",branch:"amber",main:true,
@@ -856,7 +888,7 @@ const treeHtml =
 `<li><ul>
   ${nodeLi('father_alexander', ['arkady_brat'],
      nodeLi('gf_semyon_aronovich', [], leafLi('ggf_aron_srulevich')+leafLi('ggm_malka_mintelman'))
-   + nodeLi('gm_maria_gogol', [], leafLi('ggf_alexander_gogol')+leafLi('ggm_anna_gogol'))
+   + nodeLi('gm_maria_gogol', [], nodeLi('ggf_alexander_gogol', [], leafLi('ggggf_stepan_gogol'))+leafLi('ggm_anna_gogol'))
   )}
   ${nodeLi('mother_elena', ['igor_ivanov_brat'],
      nodeLi('gf_vladimir_ivanov', ['taisiya_1936','boris_1938','valentina_iv_1940','vasily_iv_1942','alexey_1950','nikolai_1955'],
@@ -905,6 +937,21 @@ window.addEventListener('resize', drawConnector);
 if(document.fonts && document.fonts.ready){ document.fonts.ready.then(drawConnector); }
 setTimeout(drawConnector, 50);
 
+/* ============ размер текста ============ */
+const textScaleStorageKey = 'breitermanFamilyTreeTextScale';
+function setTextScale(value){
+  const scale = Math.max(0.9, Math.min(1.3, Math.round(value * 10) / 10));
+  document.documentElement.style.setProperty('--user-font-scale', scale);
+  localStorage.setItem(textScaleStorageKey, String(scale));
+  const label = document.getElementById('textSizeLabel');
+  if(label) label.textContent = `Текст ${Math.round(scale * 100)}%`;
+}
+function changeTextSize(delta){
+  const current = Number(localStorage.getItem(textScaleStorageKey) || '1');
+  setTextScale(current + delta);
+}
+setTextScale(Number(localStorage.getItem(textScaleStorageKey) || '1'));
+
 /* ============ модальное окно ============ */
 function openPerson(id){
   const p = PEOPLE[id];
@@ -934,7 +981,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModa
 /* ============ таблицы реестра (страница 2) ============ */
 const directOrder = ["anastasia","father_alexander","mother_elena","gf_semyon_aronovich","gm_maria_gogol","gf_vladimir_ivanov","gm_valentina_bobrova",
 "ggf_aron_srulevich","ggm_malka_mintelman","ggf_alexander_gogol","ggm_anna_gogol","ggf_vasily_egorovich","ggm_anisya_prokopievna","ggf_filimon_bobrov","ggm_matryona_shishova",
-"gggf_egor_ivanov","gggm_ustinya","gggf_prokopiy_ivanov","gggm_matryona_ap","ggf_ivan_vasilievich_bobrov","ggm_anna_ivanovna_bobrova","ggggf_vasily_bobrov","ggggm_olga"];
+"gggf_egor_ivanov","gggm_ustinya","gggf_prokopiy_ivanov","gggm_matryona_ap","ggf_ivan_vasilievich_bobrov","ggm_anna_ivanovna_bobrova","ggggf_vasily_bobrov","ggggm_olga","ggggf_stepan_gogol"];
 const sideOrder = ["semyon_brat","arkady_brat","igor_ivanov_brat","taisiya_1936","boris_1938","valentina_iv_1940","vasily_iv_1942","alexey_1950","nikolai_1955",
 "egor_sib2","maria_sib2","grigory_sib2","maria_ap_sib","ivan_ap_sib","mikhail_ap_sib","grigory_ap_sib",
 "alexander_f_bobrov_1938","klavdiya_1918","egor_i_1924","grigory_i_1928","fyodor_i_1929","minu_lim",
